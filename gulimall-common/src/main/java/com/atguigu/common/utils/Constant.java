@@ -67,6 +67,75 @@ public class Constant {
             return value;
         }
     }
+
+
+    /**
+     * 整数数据
+     */
+    public enum IntVaue{
+
+        /**
+         * 整数0
+         */
+        ZERO(0),
+
+        ONE(1),
+
+
+        TWO(2),
+
+
+        THREE(3),
+
+
+        FOUR(4);
+
+
+        private int value;
+
+        IntVaue(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+    }
+
+    /**
+     * 整数数据
+     */
+    public enum LongVaue{
+
+        /**
+         * 整数0
+         */
+        ZERO1(0L),
+
+        ONE(1L),
+
+
+        TWO(2L),
+
+
+        THREE(3L),
+
+
+        FOUR(4L);
+
+
+        private Long value;
+
+        LongVaue(long value) {
+            this.value = value;
+        }
+
+        public long getValue() {
+            return value;
+        }
+
+    }
     
     /**
      * 定时任务状态
