@@ -1,0 +1,29 @@
+#spring:
+#    alicloud:
+#      access-key: LTAI4GJuHzLQoaCRymgp4Aj7
+#      secret-key: jmJAvgOONqONuSjeZg4PaBsDtOjO3R
+#      oss:
+#        endpoint:
+spring:
+  cloud:
+    alicloud:
+      access-key: LTAI4GJuHzLQoaCRymgp4Aj7
+      secret-key: jmJAvgOONqONuSjeZg4PaBsDtOjO3R
+      oss:
+        endpoint: oss-cn-shanghai.aliyuncs.com
+      bucket: gulimall-hello-lwq
+      sms:
+        appcode: 147580c40c6f4e5db2cdb42c9ac43bc5
+        host: https://gyytz.market.alicloudapi.com
+        path: /sms/smsSend
+        sms-sign-id: 2e65b1bb3d054466b82f0c9d125465e2
+        template-id: 908e94ccf08b4476ba6c876d13f084ad
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  redis:
+    host: 192.168.56.10
+    port: 6379
+server:
+  port: 30000
+

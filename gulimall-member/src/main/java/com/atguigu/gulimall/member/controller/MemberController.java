@@ -1,10 +1,16 @@
 package com.atguigu.gulimall.member.controller;
 
+import com.atguigu.common.exception.BizCodeEnum;
 import com.atguigu.common.utils.PageUtils;
 import com.atguigu.common.utils.R;
 import com.atguigu.gulimall.member.entity.MemberEntity;
+import com.atguigu.gulimall.member.exception.PhoneExistException;
+import com.atguigu.gulimall.member.exception.UserNameExistException;
 import com.atguigu.gulimall.member.feign.CouponFeignService;
 import com.atguigu.gulimall.member.service.MemberService;
+import com.atguigu.gulimall.member.vo.MemberLoginVo;
+import com.atguigu.gulimall.member.vo.SocialUser;
+import com.atguigu.gulimall.member.vo.UserRegistVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +52,44 @@ public class MemberController {
         MemberEntity entity = new MemberEntity();
         entity.setUsername("测试");
         return R.ok().put("member",entity).put("conpons", couponFeignService.memberCoupons().get("comons"));
+    }
+
+
+    @PostMapping("/regist")
+    public R regist(@RequestBody UserRegistVo userRegistVo){
+        try {
+            memberService.regist(userRegistVo);
+        }catch (UserNameExistException e){
+            return R.error(BizCodeEnum.USER_EXIST_EXCEPTION.getCode(),BizCodeEnum.USER_EXIST_EXCEPTION.getMsg());
+        }catch (PhoneExistException e){
+            return R.error(BizCodeEnum.PHONE_EXIST_EXCEPTION.getCode(),BizCodeEnum.PHONE_EXIST_EXCEPTION.getMsg());
+        }
+        return R.ok();
+    }
+
+    @PostMapping("/login")
+    public R login(@RequestBody MemberLoginVo memberLoginVo){
+
+        MemberEntity memberEntity = memberService.login(memberLoginVo);
+
+        if(memberEntity != null){
+            return R.ok().setData(memberEntity);
+        }else{
+            return R.error(BizCodeEnum.LOGIN_AACCOUNT_VALID_EXCEPTION.getCode(),BizCodeEnum.LOGIN_AACCOUNT_VALID_EXCEPTION.getMsg());
+        }
+
+    }
+
+    @PostMapping("/social/login")
+    public R socialLogin(@RequestBody SocialUser socialUser){
+
+        MemberEntity memberEntity = memberService.socialLogin(socialUser);
+        if(memberEntity != null){
+            return R.ok().setData(memberEntity);
+        }else{
+            return R.error(BizCodeEnum.LOGIN_AACCOUNT_VALID_EXCEPTION.getCode(),BizCodeEnum.LOGIN_AACCOUNT_VALID_EXCEPTION.getMsg());
+        }
+
     }
 
     /**

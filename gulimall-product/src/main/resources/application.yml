@@ -5,11 +5,24 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.56.10:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    # 关闭thymeleaft 缓存
+  thymeleaf:
+    cache: false
+  redis:
+    host: 192.168.56.10
+    port: 6379
+#    alicloud:
+#      access-key: LTAI4GJuHzLQoaCRymgp4Aj7
+#      secret-key: jmJAvgOONqONuSjeZg4PaBsDtOjO3R
+#      oss:
+#        endpoint: oss-cn-shanghai.aliyuncs.com
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
@@ -19,8 +32,10 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
 
-
-
 logging:
   level:
     com.atguigu.gulimall: debug
+
+
+
+

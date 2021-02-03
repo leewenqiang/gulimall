@@ -1,23 +1,43 @@
 package com.atguigu.gulimall.product;
 
-import com.atguigu.gulimall.product.service.BrandService;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+//@Slf4j
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
+public class GulimallProductApplicationTests {
 
-@SpringBootTest
-class GulimallProductApplicationTests {
 
+
+   /* @Autowired
+    StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    BrandService brandService;
+    RedissonClient redissonClient;
+
+    @Autowired
+    AttrGroupDao attrGroupDao;
+
+    @Autowired
+    SkuSaleAttrValueDao skuSaleAttrValueDao;
 
     @Test
-    void contextLoads() {
-
-//        BrandEntity brandEntity = new BrandEntity();
-//        brandEntity.setName("小米");
-//        brandService.save(brandEntity);
+    public void contextLoads() {
+        System.out.println(redissonClient);
     }
+
+    @Test
+    public void testRedis(){
+
+//        stringRedisTemplate.opsForValue().set("aaa","bbb");
+//
+//        System.out.println(stringRedisTemplate.opsForValue().get("aaa"));
+
+//        Boolean lock = stringRedisTemplate.opsForValue().setIfAbsent("lock", UUID.randomUUID().toString(),300, TimeUnit.SECONDS);
+//        List<AttrGroppVo> attrGroupWithAttrsBySpuId = attrGroupDao.getAttrGroupWithAttrsBySpuId(111L, 225L);
+        List<SkuSaleAttrVo> saleAttrValuesBySpuId = skuSaleAttrValueDao.getSaleAttrValuesBySpuId(4L);
+        System.out.println(saleAttrValuesBySpuId);
+
+    }*/
+
+
 
 }

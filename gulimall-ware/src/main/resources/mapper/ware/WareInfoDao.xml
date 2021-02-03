@@ -10,6 +10,9 @@
         <result property="address" column="address"/>
         <result property="areacode" column="areacode"/>
     </resultMap>
+    <select id="getSkuStcok" resultType="java.lang.Long">
+        select sum(stock-stock_locked) from wms_ware_sku where sku_id=#{skuId}
+    </select>
 
 
 </mapper>

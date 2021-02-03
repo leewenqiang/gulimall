@@ -1,19 +1,15 @@
 package com.atguigu.gulimall.product.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.atguigu.gulimall.product.entity.AttrEntity;
-import com.atguigu.gulimall.product.service.AttrService;
 import com.atguigu.common.utils.PageUtils;
 import com.atguigu.common.utils.R;
+import com.atguigu.gulimall.product.service.AttrService;
+import com.atguigu.gulimall.product.vo.AttrResVo;
+import com.atguigu.gulimall.product.vo.AttrVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -41,6 +37,28 @@ public class AttrController {
         return R.ok().put("page", page);
     }
 
+    /**
+     * 列表/product/attr/base/list/{catelogId}
+     */
+//    @GetMapping("/sale/list/{catelogId}")
+    //@RequiresPermissions("product:attr:list")
+//    public R baseAttrList(@RequestParam Map<String, Object> params,@PathVariable("catelogId") Long catelogId){
+//        PageUtils page = attrService.queryBaseAttrPage(params,catelogId, attrType);
+//        return R.ok().put("page", page);
+//    }
+
+    /**
+     * 列表/product/attr/base/list/{catelogId}
+     */
+    @GetMapping("/{attrType}/list/{catelogId}")
+    //@RequiresPermissions("product:attr:list")
+    public R saleAttrList(@RequestParam Map<String, Object> params,
+                          @PathVariable("catelogId") Long catelogId,
+                          @PathVariable("attrType") String attrType){
+        PageUtils page = attrService.queryBaseAttrPage(params,catelogId,attrType);
+        return R.ok().put("page", page);
+    }
+
 
     /**
      * 信息
@@ -48,7 +66,9 @@ public class AttrController {
     @RequestMapping("/info/{attrId}")
     //@RequiresPermissions("product:attr:info")
     public R info(@PathVariable("attrId") Long attrId){
-		AttrEntity attr = attrService.getById(attrId);
+//		AttrEntity attr = attrService.getById(attrId);
+
+       AttrResVo attr = attrService.getAttrInfo(attrId);
 
         return R.ok().put("attr", attr);
     }
@@ -58,9 +78,10 @@ public class AttrController {
      */
     @RequestMapping("/save")
     // @RequiresPermissions("product:attr:save")
-    public R save(@RequestBody AttrEntity attr){
-		attrService.save(attr);
+    public R save(@RequestBody AttrVo attr){
+//		attrService.save(attr);
 
+        attrService.saveAttr(attr);
         return R.ok();
     }
 
@@ -69,8 +90,9 @@ public class AttrController {
      */
     @RequestMapping("/update")
     //@RequiresPermissions("product:attr:update")
-    public R update(@RequestBody AttrEntity attr){
-		attrService.updateById(attr);
+    public R update(@RequestBody AttrResVo attr){
+//		attrService.updateById(attr);
+        attrService.updateAttr(attr);
 
         return R.ok();
     }

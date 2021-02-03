@@ -1,19 +1,16 @@
 package com.atguigu.gulimall.ware.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.atguigu.gulimall.ware.entity.PurchaseEntity;
-import com.atguigu.gulimall.ware.service.PurchaseService;
 import com.atguigu.common.utils.PageUtils;
 import com.atguigu.common.utils.R;
+import com.atguigu.gulimall.ware.entity.PurchaseEntity;
+import com.atguigu.gulimall.ware.service.PurchaseService;
+import com.atguigu.gulimall.ware.vo.DoneVo;
+import com.atguigu.gulimall.ware.vo.MergeVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -31,7 +28,7 @@ public class PurchaseController {
     private PurchaseService purchaseService;
 
     /**
-     * 列表
+     * 列表/ware/purchase/unreceive/list
      */
     @RequestMapping("/list")
     //@RequiresPermissions("ware:purchase:list")
@@ -39,6 +36,39 @@ public class PurchaseController {
         PageUtils page = purchaseService.queryPage(params);
 
         return R.ok().put("page", page);
+    }
+
+    @RequestMapping("/unreceive/list")
+    //@RequiresPermissions("ware:purchase:list")
+    public R listUnreceive(@RequestParam Map<String, Object> params){
+        PageUtils page = purchaseService.queryPageUnreceive(params);
+
+        return R.ok().put("page", page);
+    }
+
+    //ware/purchase/merge
+
+    @PostMapping("/merge")
+    //@RequiresPermissions("ware:purchase:list")
+    public R merge(@RequestBody MergeVo mergeVo){
+         purchaseService.merge(mergeVo);
+
+        return R.ok();
+    }
+
+    @PostMapping("/done")
+    //@RequiresPermissions("ware:purchase:list")
+    public R merge(@RequestBody DoneVo doneVo){
+        purchaseService.done(doneVo);
+
+        return R.ok();
+    }
+
+    @PostMapping("/received")
+    //@RequiresPermissions("ware:purchase:list")
+    public R merge(@RequestBody Long[] ids){
+        purchaseService.received(ids);
+        return R.ok();
     }
 
 
