@@ -19,8 +19,8 @@ spring:
     host: 192.168.56.10
     port: 6379
 #    alicloud:
-#      access-key: LTAI4GJuHzLQoaCRymgp4Aj7
-#      secret-key: jmJAvgOONqONuSjeZg4PaBsDtOjO3R
+#      access-key: 
+#      secret-key: 
 #      oss:
 #        endpoint: oss-cn-shanghai.aliyuncs.com
 mybatis-plus:
